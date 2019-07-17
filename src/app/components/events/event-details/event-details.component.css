@@ -1,0 +1,16 @@
+.container {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.event-image {
+  height: 100px;
+}
+
+a {
+  cursor: pointer;
+}
+
+.session-nav {
+  margin-bottom: 10px;
+}

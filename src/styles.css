@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+.hoverwell:hover {
+  background-color: #485563;
+  cursor: pointer;
+ }
+ 
+ .container {
+  padding-top: 10px;
+ }
+ 
+ .pointable {
+  cursor: pointer;
+ }
+ 
+ button {
+  color: #555;
+ }
+ 
+ [hidden] {
+  display: none !important;
+ }
+ 
+ .toast-success {
+  background-color: #51a351;
+ }
+ .toast-error {
+  background-color: #bd362f;
+ }
+ .toast-info {
+  background-color: #2f96b4;
+ }
+ .toast-warning {
+  background-color: #f89406;
+ }
+ 
+.form-group__em--error {
+  float: right;
+  color: #e05c65;
+  padding-left: 10px;
+}
+.form-group__input--error {
+  background-color: #e3c3c5;
+}
+.form-group__input--error::placeholder {
+  color: #999;
+}
+
+
+
