@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { ISesssion } from 'src/app/models/event.model';
+import { ISession } from 'src/app/models/event.model';
 
 @Component({
   selector: 'sessions-list',
@@ -7,10 +7,10 @@ import { ISesssion } from 'src/app/models/event.model';
 })
 
 export class SessionListComponent implements OnChanges {
-  @Input() sessions: ISesssion[];
+  @Input() sessions: ISession[];
   @Input() filterBy: string;
   @Input() sortBy: string;
-  visibleSessions: ISesssion[];
+  visibleSessions: ISession[];
 
   ngOnChanges() {
     if (this.sessions) {
@@ -41,5 +41,13 @@ export class SessionListComponent implements OnChanges {
         return session.level.toLowerCase() === filter;
       });
     }
+  }
+
+  toggleVoted() {
+
+  }
+
+  userHasVoted() {
+
   }
 }

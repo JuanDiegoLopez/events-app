@@ -11,7 +11,7 @@ import {
   EventCreateComponent
 } from './components/events';
 
-import { SessionCreateComponent, SessionListComponent } from './components/sessions';
+import { SessionCreateComponent, SessionListComponent, UpvoteComponent } from './components/sessions';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { Erro404Component } from './components/errors/404.component';
@@ -21,16 +21,24 @@ import { DurationPipe } from './pipes/duration.pipe';
 
 import {
   EventService,
-  ToastrService,
+  TOASTR_TOKEN,
   EventRouteActivator,
   EventListResolver,
-  checkDirtyState
+  checkDirtyState,
+  JQ_TOKEN
 } from 'src/services/index';
 
 import { routes } from './routes';
 import { AuthService } from 'src/services/auth.service';
 import { AuthGuardService } from './guards/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { ModalComponent } from './components/common/modal/modal.component';
+import { ModalTriggerDirective } from './directives/modal-trigger.directive';
+
+import * as toastr from 'toastr';
+
+let $ = window['jQuery'];
 
 @NgModule({
   declarations: [
@@ -44,7 +52,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SessionCreateComponent,
     SessionListComponent,
     CollapsibleWellComponent,
-    DurationPipe
+    ModalComponent,
+    UpvoteComponent,
+    DurationPipe,
+    ModalTriggerDirective
   ],
   imports: [
     BrowserModule,
@@ -54,7 +65,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   providers: [
     EventService,
-    ToastrService,
+    { provide: TOASTR_TOKEN, useValue: toastr },
+    { provide: JQ_TOKEN, useValue: $ },
     EventRouteActivator,
     EventListResolver,
     AuthService,

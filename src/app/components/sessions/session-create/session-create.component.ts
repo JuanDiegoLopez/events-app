@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { ISesssion } from 'src/app/models/event.model';
+import { ISession } from 'src/app/models/event.model';
 import { restrictedWords } from 'src/app/validators/restricted-words.validators';
 
 @Component({
@@ -35,7 +35,7 @@ export class SessionCreateComponent implements OnInit {
   }
 
   saveSession(formValues: any) {
-    let newSession: ISesssion = {
+    let newSession: ISession = {
       id: undefined,
       name: formValues.name,
       presenter: formValues.presenter,

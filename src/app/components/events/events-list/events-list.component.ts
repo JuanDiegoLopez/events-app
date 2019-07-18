@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { EventService } from 'src/services/event.service';
-import { ToastrService } from 'src/services/toastr.service';
+import { Component, OnInit, Inject } from '@angular/core';
+import { TOASTR_TOKEN } from 'src/services/toastr.service';
 import { ActivatedRoute } from '@angular/router';
 import { IEvent } from 'src/app/models/event.model';
+import { IToastr } from 'src/app/models/toastr.model';
 
 @Component({
   templateUrl: './events-list.component.html'
@@ -10,7 +10,7 @@ import { IEvent } from 'src/app/models/event.model';
 
 export class EventsListComponent implements OnInit {
   events: IEvent[];
-  constructor(private route: ActivatedRoute, private toastrService: ToastrService) {
+  constructor(private route: ActivatedRoute, @Inject(TOASTR_TOKEN) private toastr: IToastr) {
   }
 
   ngOnInit() {
@@ -18,6 +18,6 @@ export class EventsListComponent implements OnInit {
   }
 
   handleClick(data) {
-    this.toastrService.error(data, 'Error');
+    this.toastr.error(data, 'Error');
   }
 }

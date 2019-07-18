@@ -10,10 +10,10 @@ export interface IEvent {
     city: string,
     country: string
   },
-  sessions: ISesssion[]
+  sessions: ISession[]
 };
 
-export interface ISesssion {
+export interface ISession {
   id: number,
   name: string,
   presenter: string,
