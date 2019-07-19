@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
@@ -11,7 +13,11 @@ import {
   EventCreateComponent
 } from './components/events';
 
-import { SessionCreateComponent, SessionListComponent, UpvoteComponent } from './components/sessions';
+import {
+  SessionCreateComponent,
+  SessionListComponent,
+  UpvoteComponent
+} from './components/sessions';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { Erro404Component } from './components/errors/404.component';
@@ -22,8 +28,8 @@ import { DurationPipe } from './pipes/duration.pipe';
 import {
   EventService,
   TOASTR_TOKEN,
-  EventRouteActivator,
   EventListResolver,
+  EventResolver,
   checkDirtyState,
   JQ_TOKEN
 } from 'src/services/index';
@@ -31,7 +37,6 @@ import {
 import { routes } from './routes';
 import { AuthService } from 'src/services/auth.service';
 import { AuthGuardService } from './guards/auth.guard';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ModalComponent } from './components/common/modal/modal.component';
 import { ModalTriggerDirective } from './directives/modal-trigger.directive';
@@ -64,13 +69,14 @@ let $ = window['jQuery'];
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpClientModule
   ],
   providers: [
     EventService,
     { provide: TOASTR_TOKEN, useValue: toastr },
     { provide: JQ_TOKEN, useValue: $ },
-    EventRouteActivator,
+    EventResolver,
     EventListResolver,
     AuthService,
     AuthGuardService,

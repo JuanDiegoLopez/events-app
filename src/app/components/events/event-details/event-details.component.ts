@@ -15,15 +15,13 @@ export class EventDetailsComponent implements OnInit {
   filterBy: string = 'all';
   sortBy: string = 'votes';
 
-  constructor(private eventService: EventService, private activateRoute: ActivatedRoute) {
-
-  }
+  constructor(private eventService: EventService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.activateRoute.params.subscribe(params => {
-      this.event = this.eventService.getEventById(parseInt(params.id));
+    this.route.data.subscribe(data => {
+      this.event = data.event;
       this.addMode = false;
-    })
+    });
   }
 
   addSession() {
@@ -34,7 +32,7 @@ export class EventDetailsComponent implements OnInit {
     const maxId = Math.max.apply(null, this.event.sessions.map(s => session.id));
     session.id = maxId + 1;
     this.event.sessions.push(session);
-    this.eventService.updateEvent(this.event);
+    this.eventService.saveEvent(this.event).subscribe();
     this.addMode = false;
   }
 }

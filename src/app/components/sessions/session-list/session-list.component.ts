@@ -9,6 +9,7 @@ import { AuthService } from 'src/services/auth.service';
 })
 
 export class SessionListComponent implements OnChanges {
+  @Input() eventId: number;
   @Input() sessions: ISession[];
   @Input() filterBy: string;
   @Input() sortBy: string;
@@ -43,9 +44,9 @@ export class SessionListComponent implements OnChanges {
 
   toggleVote(session: ISession) {
     if (this.userHasVoted(session)) {
-      this.voterService.deleteVoter(session, this.authService.currentUser.userName);
+      this.voterService.deleteVoter(this.eventId, session, this.authService.currentUser.userName);
     } else {
-      this.voterService.addVoter(session, this.authService.currentUser.userName)
+      this.voterService.addVoter(this.eventId, session, this.authService.currentUser.userName)
     }
 
     if (this.sortBy === 'votes') {
@@ -54,7 +55,7 @@ export class SessionListComponent implements OnChanges {
   }
 
   userHasVoted(session: ISession) {
-    return this.voterService.userHasVoted(session, this.authService.currentUser.userName);
+    return this.voterService.userHasVoted(this.eventId, session, this.authService.currentUser.userName);
   }
 }
 
