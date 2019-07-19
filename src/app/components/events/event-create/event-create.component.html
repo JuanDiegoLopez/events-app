@@ -22,26 +22,28 @@
      <em class="form-group__em--error" *ngIf="newEventForm.controls.price?.invalid && (newEventForm.controls.price?.touched)">Required</em>
      <input ngModel name="price" required id="eventPrice" type="text" type="number" class="form-control" [ngClass]="{'form-group__input--error': newEventForm.controls.price?.invalid && newEventForm.controls.price?.touched}" placeholder="event price..." />
    </div>
-   
-   <div ngModelGroup="location">
+
+   <div ngModelGroup="location" validateLocation #locationGroup="ngModelGroup">
      <div class="form-group">
        <label for="address">Event Location:</label>
-       <input (ngModel)="address" name="address" id="address" type="text" class="form-control" placeholder="Address of event..." />
+       <em class="form-group__em--error" *ngIf="locationGroup?.invalid && locationGroup?.touched"> You must enter either the full location or an Online Url</em>
+       <input ngModel name="address" id="address" type="text" class="form-control" placeholder="Address of event..." [ngClass]="{'form-group__input--error': locationGroup?.invalid && locationGroup?.touched}"/>
      </div>
      <div class="row">
        <div class="col-md-6">
-         <input ngModel name="city" id="city" type="text" class="form-control" placeholder="City..." />
+         <input ngModel name="city" id="city" type="text" class="form-control" placeholder="City..." [ngClass]="{'form-group__input--error': locationGroup?.invalid && locationGroup?.touched}"/>
        </div>
        <div class="col-md-6">
-         <input ngModel name="country" id="country" type="text" class="form-control" placeholder="Country..." />
+         <input ngModel name="country" id="country" type="text" class="form-control" placeholder="Country..." [ngClass]="{'form-group__input--error': locationGroup?.invalid && locationGroup?.touched}"/>
        </div>
      </div>
    </div>
 
    <div class="form-group">
      <label for="onlineUrl">Online Url:</label>
-     <input ngModel name="onlineUrl" id="onlineUrl" type="text" class="form-control" placeholder="Online Url..." />
+     <input ngModel name="onlineUrl" id="onlineUrl" type="text" class="form-control" placeholder="Online Url..." (keyup)="locationGroup.control.controls.address.updateValueAndValidity()" [ngClass]="{'form-group__input--error': locationGroup?.invalid && locationGroup?.touched}"/>
    </div>
+
    <div class="form-group">
      <label for="imageUrl">Image:</label>
      <em class="form-group__em--error" *ngIf="newEventForm.controls.imageUrl?.invalid && newEventForm.controls.imageUrl?.touched && newEventForm.controls.imageUrl?.errors.required">Required</em>
@@ -50,8 +52,8 @@
      <br>
      <img class="event-img" [src]="newEventForm.controls.imageUrl.value" *ngIf="newEventForm.controls.imageUrl?.valid"/>
    </div>
-   
-   <button type="submit" class="btn btn-primary" [disabled]="newEventForm.invalid">Save</button>&nbsp; 
+
+   <button type="submit" class="btn btn-primary" [disabled]="newEventForm.invalid">Save</button>&nbsp;
   <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
  </form>
 </div>

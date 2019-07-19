@@ -1,7 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
-import { IEvent, ISession } from 'src/app/models/event.model';
+import { IEvent } from 'src/app/models/event.interface';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { ISession } from 'src/app/models/session.interface';
 
 @Injectable()
 

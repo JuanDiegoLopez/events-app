@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
 import { Router } from '@angular/router';
-import { IEvent } from 'src/app/models/event.model';
+
 import { EventService } from 'src/services';
 
 @Component({

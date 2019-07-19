@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUser } from 'src/app/models/user.model';
+import { IUser } from 'src/app/models/user.interface';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable()

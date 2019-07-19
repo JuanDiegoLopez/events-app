@@ -1,5 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { ISession } from 'src/app/models/event.model';
+import { ISession } from 'src/app/models/session.interface';
+import { VoterService } from 'src/services/voter.service';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'sessions-list',
@@ -12,6 +14,8 @@ export class SessionListComponent implements OnChanges {
   @Input() sortBy: string;
   visibleSessions: ISession[];
 
+  constructor(private authService: AuthService, private voterService: VoterService) {}
+
   ngOnChanges() {
     if (this.sessions) {
       this.filterSessions(this.filterBy);
@@ -21,15 +25,9 @@ export class SessionListComponent implements OnChanges {
 
   sortSessions(sort: string) {
     if (sort === 'name') {
-      this.visibleSessions.sort((s1, s2) => {
-        if (s1.name > s2.name) return 1;
-        else if (s1.name === s2.name) return 0;
-        else return -1;
-      })
+      this.visibleSessions.sort(sortByNameAsce);
     } else {
-      this.visibleSessions.sort((s1, s2) => {
-        return s2.voters.length - s1.voters.length;
-      })
+      this.visibleSessions.sort(sortByVotersDesc);
     }
   }
 
@@ -43,11 +41,29 @@ export class SessionListComponent implements OnChanges {
     }
   }
 
-  toggleVoted() {
+  toggleVote(session: ISession) {
+    if (this.userHasVoted(session)) {
+      this.voterService.deleteVoter(session, this.authService.currentUser.userName);
+    } else {
+      this.voterService.addVoter(session, this.authService.currentUser.userName)
+    }
 
+    if (this.sortBy === 'votes') {
+      this.visibleSessions.sort(sortByVotersDesc);
+    }
   }
 
-  userHasVoted() {
-
+  userHasVoted(session: ISession) {
+    return this.voterService.userHasVoted(session, this.authService.currentUser.userName);
   }
+}
+
+function sortByNameAsce(s1: ISession, s2: ISession) {
+    if (s1.name > s2.name) return 1;
+    else if (s1.name === s2.name) return 0;
+    else return -1;
+}
+
+function sortByVotersDesc(s1: ISession, s2: ISession) {
+    return s2.voters.length - s1.voters.length;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { ISession } from 'src/app/models/event.model';
+import { ISession } from 'src/app/models/session.interface';
 import { restrictedWords } from 'src/app/validators/restricted-words.validators';
 
 @Component({

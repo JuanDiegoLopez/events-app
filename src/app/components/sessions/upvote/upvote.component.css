@@ -1,5 +1,6 @@
 .votingWidgetContainer {
   padding-left: 24px;
+  margin-top: 10px;
 }
 
 .votingWidget {
@@ -16,10 +17,6 @@
 
 .votingButton i {
   color: white;
-}
-
-.badge-inverse {
-  background-color: #fff;
 }
 
 .votingCount {

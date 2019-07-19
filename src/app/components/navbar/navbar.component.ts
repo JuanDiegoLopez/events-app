@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/services/auth.service';
-import { ISession } from 'src/app/models/event.model';
+import { ISession } from 'src/app/models/session.interface';
 import { EventService } from 'src/services';
 
 @Component({

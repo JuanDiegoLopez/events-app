@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { IEvent } from 'src/app/models/event.model';
+import { IEvent } from 'src/app/models/event.interface';
 
 @Component({
   selector: 'app-event',
