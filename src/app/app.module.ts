@@ -42,7 +42,7 @@ import { ModalComponent } from './components/common/modal/modal.component';
 import { ModalTriggerDirective } from './directives/modal-trigger.directive';
 
 import * as toastr from 'toastr';
-import { VoterService } from 'src/services/voter.service';
+import { VoterService } from 'src/services/voter/voter.service';
 import { LocationValidatorDirective } from './directives/location-validator.directive';
 
 let $ = window['jQuery'];

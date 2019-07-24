@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { AuthService } from 'src/services/auth.service';
 import { Router } from '@angular/router';
+import { TOASTR_TOKEN } from 'src/services';
+import { IToastr } from 'src/app/models/toastr.interface';
+import { FormControl } from '@angular/forms';
 
 @Component({
   templateUrl: './login.component.html',
@@ -8,17 +11,21 @@ import { Router } from '@angular/router';
 })
 
 export class LoginComponent {
-  userName: string;
+  username: string;
   password: string;
   mouseoverLogin: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, @Inject(TOASTR_TOKEN) private toastr: IToastr) {}
 
-  }
-
-  login() {
-    this.authService.login(this.userName, this.password);
-    this.router.navigate(['events']);
+  login(formValues) {
+    this.authService.login(formValues.username, formValues.password)
+      .subscribe(res => {
+        if (!res) {
+          this.toastr.error('Username or passowrd incorrect', 'Login Fail');
+        } else {
+          this.router.navigate(['events']);
+        }
+      })
   }
 
   cancel () {

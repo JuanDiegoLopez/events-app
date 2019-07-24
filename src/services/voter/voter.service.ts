@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { EventService } from './event.service';
+import { EventService } from '../event.service';
 import { ISession } from 'src/app/models/session.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { handleError } from './handle-error';
+import { handleError } from '../handle-error';
 import { catchError } from 'rxjs/operators';
 import { IEvent } from 'src/app/models/event.interface';
 
@@ -12,6 +12,8 @@ export class VoterService {
   constructor(private http: HttpClient) {}
 
   addVoter(eventId: number, session: ISession, voterName: string) {
+    session.voters.push(voterName);
+
     const url = `/api/events/${eventId}/sessions/${session.id}/voters/${voterName}`;
     const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 
@@ -21,6 +23,8 @@ export class VoterService {
   }
 
   deleteVoter(eventId: number, session: ISession, voterName: string) {
+    session.voters = session.voters.filter(voter => voter !== voterName);
+
     const url = `/api/events/${eventId}/sessions/${session.id}/voters/${voterName}`;
 
     this.http.delete(url)
@@ -28,7 +32,7 @@ export class VoterService {
       .subscribe();
   }
 
-  userHasVoted(eventId: number, session: ISession, voterName: string): boolean {
+  userHasVoted(session: ISession, voterName: string): boolean {
     return session.voters.includes(voterName);
   }
 }

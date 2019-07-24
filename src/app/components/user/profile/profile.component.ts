@@ -27,8 +27,17 @@ export class ProfileComponent implements OnInit{
 
   saveProfile(formValues:any) {
     if (!this.profileForm.valid) return;
-    this.authService.updateProfile(formValues.firstName, formValues.lastName);
-    this.toastr.success('Profile updated!');
+    this.authService.updateProfile(formValues.firstName, formValues.lastName)
+      .subscribe(() => {
+        this.toastr.success('Profile updated!');
+      });
+  }
+
+  logout() {
+    this.authService.logout()
+      .subscribe(() => {
+        this.router.navigate(['user/login']);
+      });
   }
 
   cancel() {
