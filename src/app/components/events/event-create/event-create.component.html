@@ -23,7 +23,7 @@
      <input ngModel name="price" required id="eventPrice" type="text" type="number" class="form-control" [ngClass]="{'form-group__input--error': newEventForm.controls.price?.invalid && newEventForm.controls.price?.touched}" placeholder="event price..." />
    </div>
 
-   <div ngModelGroup="location" validateLocation #locationGroup="ngModelGroup">
+   <div ngModelGroup="location" appValidateLocation #locationGroup="ngModelGroup">
      <div class="form-group">
        <label for="address">Event Location:</label>
        <em class="form-group__em--error" *ngIf="locationGroup?.invalid && locationGroup?.touched"> You must enter either the full location or an Online Url</em>

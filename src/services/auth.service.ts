@@ -9,7 +9,7 @@ import { of } from 'rxjs';
 export class AuthService {
   currentUser: IUser;
 
-  constructor(private http:HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
     const loginInfo = { username, password };
@@ -18,12 +18,12 @@ export class AuthService {
     };
 
     return this.http.post('/api/login', loginInfo, options)
-      .pipe(tap(data => {
-        this.currentUser =  data['user'];
+      .pipe(tap((data: any) => {
+        this.currentUser =  data.user;
       }))
       .pipe(catchError(err => {
         return of(false);
-      }))
+      }));
   }
 
   isAuthenticated() {
@@ -34,9 +34,9 @@ export class AuthService {
     this.http.get('/api/currentIdentity')
       .subscribe(data => {
         if (data instanceof Object) {
-          this.currentUser = <IUser> data;
+          this.currentUser = data as IUser;
         }
-      })
+      });
   }
 
   updateProfile(firstName: string, lastName: string) {

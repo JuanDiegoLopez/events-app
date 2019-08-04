@@ -9,7 +9,7 @@ import { IToastr } from 'src/app/models/toastr.interface';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit{
+export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   firstName: FormControl;
   lastName: FormControl;
@@ -25,8 +25,10 @@ export class ProfileComponent implements OnInit{
     });
   }
 
-  saveProfile(formValues:any) {
-    if (!this.profileForm.valid) return;
+  saveProfile(formValues: any) {
+    if (!this.profileForm.valid) {
+      return;
+    }
     this.authService.updateProfile(formValues.firstName, formValues.lastName)
       .subscribe(() => {
         this.toastr.success('Profile updated!');

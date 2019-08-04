@@ -10,7 +10,7 @@ import { IEvent } from 'src/app/models/event.interface';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  query: string = '';
+  query = '';
   foundSessions: ISession[];
   events: IEvent[];
 

@@ -2,7 +2,7 @@ import { Directive } from '@angular/core';
 import { FormGroup, NG_VALIDATORS } from '@angular/forms';
 
 @Directive({
-  selector: '[validateLocation]',
+  selector: '[appValidateLocation]',
   providers: [
     {
       provide: NG_VALIDATORS,
@@ -11,12 +11,12 @@ import { FormGroup, NG_VALIDATORS } from '@angular/forms';
     }
   ]
 })
-export class LocationValidatorDirective{
-  validate(formGroup: FormGroup): { [key: string] : any } {
+export class LocationValidatorDirective {
+  validate(formGroup: FormGroup): { [key: string]: any } {
     const addressControl = formGroup.controls.address;
     const cityControl = formGroup.controls.city;
     const countryControl = formGroup.controls.country;
-    const onlineUrlControl = (<FormGroup> formGroup.root).controls.onlineUrl;
+    const onlineUrlControl = (formGroup.root as FormGroup).controls.onlineUrl;
 
     if ((addressControl &&
         addressControl.value &&
@@ -27,7 +27,7 @@ export class LocationValidatorDirective{
         (onlineUrlControl && onlineUrlControl.value)) {
           return null;
       } else {
-        return { validateLocation: false }
+        return { validateLocation: false };
       }
   }
 }

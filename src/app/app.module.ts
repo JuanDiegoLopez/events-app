@@ -45,7 +45,7 @@ import * as toastr from 'toastr';
 import { VoterService } from 'src/services/voter/voter.service';
 import { LocationValidatorDirective } from './directives/location-validator.directive';
 
-let $ = window['jQuery'];
+const $ = (window as any).jQuery;
 
 @NgModule({
   declarations: [

@@ -5,7 +5,7 @@ import { AuthService } from 'src/services/auth.service';
 import { EventService } from 'src/services';
 
 @Component({
-  selector: 'sessions-list',
+  selector: 'app-sessions-list',
   templateUrl: './session-list.component.html'
 })
 
@@ -16,7 +16,7 @@ export class SessionListComponent implements OnChanges {
   @Input() sortBy: string;
   visibleSessions: ISession[];
 
-  constructor(private authService: AuthService, private voterService: VoterService, private eventService: EventService) {}
+  constructor(private authService: AuthService, private voterService: VoterService) {}
 
   ngOnChanges() {
     if (this.sessions) {
@@ -47,7 +47,7 @@ export class SessionListComponent implements OnChanges {
     if (this.userHasVoted(session)) {
       this.voterService.deleteVoter(this.eventId, session, this.authService.currentUser.userName);
     } else {
-      this.voterService.addVoter(this.eventId, session, this.authService.currentUser.userName)
+      this.voterService.addVoter(this.eventId, session, this.authService.currentUser.userName);
     }
 
     if (this.sortBy === 'votes') {
@@ -61,9 +61,13 @@ export class SessionListComponent implements OnChanges {
 }
 
 function sortByNameAsce(s1: ISession, s2: ISession) {
-    if (s1.name > s2.name) return 1;
-    else if (s1.name === s2.name) return 0;
-    else return -1;
+    if (s1.name > s2.name) {
+      return 1;
+    } else if (s1.name === s2.name) {
+      return 0;
+    } else {
+      return -1;
+    }
 }
 
 function sortByVotersDesc(s1: ISession, s2: ISession) {

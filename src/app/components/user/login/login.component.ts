@@ -13,7 +13,7 @@ import { FormControl } from '@angular/forms';
 export class LoginComponent {
   username: string;
   password: string;
-  mouseoverLogin: boolean = false;
+  mouseoverLogin = false;
 
   constructor(private authService: AuthService, private router: Router, @Inject(TOASTR_TOKEN) private toastr: IToastr) {}
 
@@ -25,10 +25,10 @@ export class LoginComponent {
         } else {
           this.router.navigate(['events']);
         }
-      })
+      });
   }
 
-  cancel () {
+  cancel() {
     this.router.navigate(['events']);
   }
 }

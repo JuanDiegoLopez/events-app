@@ -1,16 +1,16 @@
 import { ISession } from './session.interface';
 
 export interface IEvent {
-  id:number,
-  name: string,
-  date: Date,
-  time: string,
-  price: number,
-  imageUrl: string,
+  id: number;
+  name: string;
+  date: Date;
+  time: string;
+  price: number;
+  imageUrl: string;
   location?: {
     address: string,
     city: string,
     country: string
-  },
-  sessions: ISession[]
-};
+  };
+  sessions: ISession[];
+}
